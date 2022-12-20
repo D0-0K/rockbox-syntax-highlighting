@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+Rockbox Theming Syntax Highlighting
+for GTKSourceView 5
+
+Dook  2022
+CC-BY-SA
+-->
+
+<language id="rockbox" name="Rockbox" version="2.0" _section="Other">
+  <metadata>
+    <property name="mimetypes">text/plain</property>
+    <property name="globs">*.wps;*.fms;*.sbs</property>
+    <property name="line-comment-start">#</property>
+  </metadata>
+
+  <styles>
+    <style id="keyword"             name="Keyword"               map-to="def:keyword"/>
+    <style id="preload"             name="PreLoad"               map-to="def:shebang"/>
+    <style id="conditional"         name="Conditional"           map-to="def:type"/>
+    <style id="delimiter"           name="Delimiter"             map-to="def:operator"/>
+    <style id="comment"             name="Comment"               map-to="def:comment"/>
+    <style id="string"              name="String"                map-to="def:string"/>
+    <style id="integer"             name="Integer"               map-to="def:base-n-integer"/>
+    <style id="operator"            name="Operator"              map-to="def:operator"/>
+  </styles>
+
+  <definitions>
+    <context id="rockbox">
+      <include>
+       <context ref="def:shell-like-comment"/>
+       <context ref="operators"/>
+       
+       <define-regex id="net-address" extended="true" case-sensitive="false">
+         \%[                                         # separator
+         (https?|ftp|nntp|news|javascript|about):    # protocol
+         [^\ \\]* [^\ \\.:;,?&gt;&lt;)]              # address
+         (?![a-z0-9_.-])                             # separator
+       </define-regex>
+       
+       <context id="delimiters" style-ref="delimiter">
+         <match>[\)\(]+|[\&lt;\&gt;]+|[][]+</match>
+       </context>
+      
+       <context id="comment" style-ref="comment">
+         <start>#</start>
+         <end>$</end>
+       </context>
+
+       <context id="string" style-ref="string">
+         <match>[a-zA-Z]+</match>
+       </context>
+    
+       <context id="integer" style-ref="integer">
+         <match>[0-9]+</match>
+       </context>
+    
+       <context id="operators" style-ref="operator" extend-parent="false">
+         <match>[-^:/\=\+\*&amp;&lt;&gt;]</match>
+       </context>
+      
+       <context id="preloads" style-ref="preload">
+         <prefix>%</prefix>
+         <keyword>xl</keyword>
+         <keyword>Vl</keyword>
+         <keyword>Vi</keyword>
+         <keyword>vs</keyword>
+         <keyword>Fl</keyword>
+         <keyword>Cl</keyword>
+       </context>
+
+       <context id="keywords" style-ref="keyword">
+         <prefix>%</prefix>
+         <keyword>ac</keyword>
+         <keyword>al</keyword>
+         <keyword>aL</keyword>
+         <keyword>and</keyword>
+         <keyword>ar</keyword>
+         <keyword>aR</keyword>
+         <keyword>aX</keyword>
+         <keyword>bc</keyword>
+         <keyword>bl</keyword>
+         <keyword>bp</keyword>
+         <keyword>bs</keyword>
+         <keyword>bt</keyword>
+         <keyword>bv</keyword>
+         <keyword>C</keyword>
+         <keyword>ca</keyword>
+         <keyword>cb</keyword>
+         <keyword>cc</keyword>
+         <keyword>cd</keyword>
+         <keyword>Cd</keyword>
+         <keyword>ce</keyword>
+         <keyword>cf</keyword>
+         <keyword>cH</keyword>
+         <keyword>cI</keyword>
+         <keyword>ck</keyword>
+         <keyword>cl</keyword>
+         <keyword>cM</keyword>
+         <keyword>cm</keyword>
+         <keyword>cP</keyword>
+         <keyword>cp</keyword>
+         <keyword>cS</keyword>
+         <keyword>cs</keyword>
+         <keyword>cu</keyword>
+         <keyword>cw</keyword>
+         <keyword>cy</keyword>
+         <keyword>cY</keyword>
+         <keyword>d(1)</keyword>
+         <keyword>D(1)</keyword>
+         <keyword>d(2)</keyword>
+         <keyword>D(2)</keyword>
+         <keyword>d(3)</keyword>
+         <keyword>D(3)</keyword>
+         <keyword>dr</keyword>
+         <keyword>Dr</keyword>
+         <keyword>Dx</keyword>
+         <keyword>fb</keyword>
+         <keyword>Fb</keyword>
+         <keyword>fc</keyword>
+         <keyword>Fc</keyword>
+         <keyword>ff</keyword>
+         <keyword>Ff</keyword>
+         <keyword>fk</keyword>
+         <keyword>Fk</keyword>
+         <keyword>fm</keyword>
+         <keyword>Fm</keyword>
+         <keyword>fn</keyword>
+         <keyword>Fn</keyword>
+         <keyword>fp</keyword>
+         <keyword>Fp</keyword>
+         <keyword>fs</keyword>
+         <keyword>Fs</keyword>
+         <keyword>fv</keyword>
+         <keyword>Fv</keyword>
+         <keyword>Fx</keyword>
+         <keyword>ia</keyword>
+         <keyword>Ia</keyword>
+         <keyword>iA</keyword>
+         <keyword>IA</keyword>
+         <keyword>ic</keyword>
+         <keyword>Ic</keyword>
+         <keyword>iC</keyword>
+         <keyword>IC</keyword>
+         <keyword>id</keyword>
+         <keyword>ID</keyword>
+         <keyword>if</keyword>
+         <keyword>iG</keyword>
+         <keyword>IG</keyword>
+         <keyword>ig</keyword>
+         <keyword>Ig</keyword>
+         <keyword>ik</keyword>
+         <keyword>Ik</keyword>
+         <keyword>in</keyword>
+         <keyword>In</keyword>
+         <keyword>it</keyword>
+         <keyword>It</keyword>
+         <keyword>iv</keyword>
+         <keyword>Iv</keyword>
+         <keyword>Ix</keyword>
+         <keyword>iy</keyword>
+         <keyword>Iy</keyword>
+         <keyword>LB</keyword>
+         <keyword>Lb</keyword>
+         <keyword>LC</keyword>
+         <keyword>Lc</keyword>
+         <keyword>lh</keyword>
+         <keyword>Li</keyword>
+         <keyword>LI</keyword>
+         <keyword>LN</keyword>
+         <keyword>LR</keyword>
+         <keyword>LT</keyword>
+         <keyword>Lt</keyword>
+         <keyword>mh</keyword>
+         <keyword>mm</keyword>
+         <keyword>mp</keyword>
+         <keyword>mr</keyword>
+         <keyword>mv</keyword>
+         <keyword>or</keyword>
+         <keyword>pb</keyword>
+         <keyword>pc</keyword>
+         <keyword>pe</keyword>
+         <keyword>pE</keyword>
+         <keyword>pf</keyword>
+         <keyword>pL</keyword>
+         <keyword>pm</keyword>
+         <keyword>pn</keyword>
+         <keyword>pp</keyword>
+         <keyword>pr</keyword>
+         <keyword>pR</keyword>
+         <keyword>ps</keyword>
+         <keyword>pS</keyword>
+         <keyword>pt</keyword>
+         <keyword>pv</keyword>
+         <keyword>px</keyword>
+         <keyword>ra</keyword>
+         <keyword>Rb</keyword>
+         <keyword>Re</keyword>
+         <keyword>Rf</keyword>
+         <keyword>rg</keyword>
+         <keyword>Rh</keyword>
+         <keyword>Rm</keyword>
+         <keyword>Rn</keyword>
+         <keyword>rp</keyword>
+         <keyword>Rp</keyword>
+         <keyword>rr</keyword>
+         <keyword>Rr</keyword>
+         <keyword>Rs</keyword>
+         <keyword>s</keyword>
+         <keyword>Sr</keyword>
+         <keyword>ss</keyword>
+         <keyword>St</keyword>
+         <keyword>Sx</keyword>
+         <keyword>T</keyword>
+         <keyword>t</keyword>
+         <keyword>ta</keyword>
+         <keyword>tb</keyword>
+         <keyword>Tc</keyword>
+         <keyword>tf</keyword>
+         <keyword>Tf</keyword>
+         <keyword>Ti</keyword>
+         <keyword>Tl</keyword>
+         <keyword>tm</keyword>
+         <keyword>Tn</keyword>
+         <keyword>tp</keyword>
+         <keyword>Tp</keyword>
+         <keyword>tr</keyword>
+         <keyword>ts</keyword>
+         <keyword>tt</keyword>
+         <keyword>tx</keyword>
+         <keyword>ty</keyword>
+         <keyword>tz</keyword>
+         <keyword>V</keyword>
+         <keyword>Vb</keyword>
+         <keyword>VB</keyword>
+         <keyword>Vd</keyword>
+         <keyword>Vf</keyword>
+         <keyword>Vg</keyword>
+         <keyword>vg</keyword>
+         <keyword>Vg</keyword>
+         <keyword>VI</keyword>
+         <keyword>vl</keyword>
+         <keyword>Vp</keyword>
+         <keyword>Vs</keyword>
+         <keyword>wd</keyword>
+         <keyword>we</keyword>
+         <keyword>wi</keyword>
+         <keyword>X</keyword>
+         <keyword>x</keyword>
+         <keyword>xd</keyword>
+         <keyword>xf</keyword>
+       </context>
+    
+       <context id="conditionals" style-ref="conditional">
+         <prefix>%[&#63;]</prefix>
+         <keyword>ac</keyword>
+         <keyword>al</keyword>
+         <keyword>aL</keyword>
+         <keyword>ar</keyword>
+         <keyword>aR</keyword>
+         <keyword>bc</keyword>
+         <keyword>bl</keyword>
+         <keyword>bp</keyword>
+         <keyword>bs</keyword>
+         <keyword>bt</keyword>
+         <keyword>bv</keyword>
+         <keyword>C</keyword>
+         <keyword>ca</keyword>
+         <keyword>cb</keyword>
+         <keyword>cc</keyword>
+         <keyword>cd</keyword>
+         <keyword>Cd</keyword>
+         <keyword>ce</keyword>
+         <keyword>cf</keyword>
+         <keyword>cH</keyword>
+         <keyword>cI</keyword>
+         <keyword>ck</keyword>
+         <keyword>cl</keyword>
+         <keyword>cM</keyword>
+         <keyword>cm</keyword>
+         <keyword>cP</keyword>
+         <keyword>cp</keyword>
+         <keyword>cS</keyword>
+         <keyword>cs</keyword>
+         <keyword>cu</keyword>
+         <keyword>cw</keyword>
+         <keyword>cy</keyword>
+         <keyword>cY</keyword>
+         <keyword>d(1)</keyword>
+         <keyword>D(1)</keyword>
+         <keyword>d(2)</keyword>
+         <keyword>D(2)</keyword>
+         <keyword>d(3)</keyword>
+         <keyword>D(3)</keyword>
+         <keyword>fb</keyword>
+         <keyword>Fb</keyword>
+         <keyword>fc</keyword>
+         <keyword>Fc</keyword>
+         <keyword>ff</keyword>
+         <keyword>Ff</keyword>
+         <keyword>fk</keyword>
+         <keyword>Fk</keyword>
+         <keyword>fm</keyword>
+         <keyword>Fm</keyword>
+         <keyword>fn</keyword>
+         <keyword>Fn</keyword>
+         <keyword>fp</keyword>
+         <keyword>Fp</keyword>
+         <keyword>fs</keyword>
+         <keyword>Fs</keyword>
+         <keyword>fv</keyword>
+         <keyword>Fv</keyword>
+         <keyword>ia</keyword>
+         <keyword>Ia</keyword>
+         <keyword>iA</keyword>
+         <keyword>IA</keyword>
+         <keyword>ic</keyword>
+         <keyword>Ic</keyword>
+         <keyword>iC</keyword>
+         <keyword>IC</keyword>
+         <keyword>id</keyword>
+         <keyword>ID</keyword>
+         <keyword>if</keyword>
+         <keyword>iG</keyword>
+         <keyword>IG</keyword>
+         <keyword>ig</keyword>
+         <keyword>Ig</keyword>
+         <keyword>ik</keyword>
+         <keyword>Ik</keyword>
+         <keyword>in</keyword>
+         <keyword>In</keyword>
+         <keyword>it</keyword>
+         <keyword>It</keyword>
+         <keyword>iv</keyword>
+         <keyword>Iv</keyword>
+         <keyword>iy</keyword>
+         <keyword>Iy</keyword>
+         <keyword>LC</keyword>
+         <keyword>Lc</keyword>
+         <keyword>lh</keyword>
+         <keyword>Li</keyword>
+         <keyword>LI</keyword>
+         <keyword>LN</keyword>
+         <keyword>LR</keyword>
+         <keyword>LT</keyword>
+         <keyword>Lt</keyword>
+         <keyword>mh</keyword>
+         <keyword>mm</keyword>
+         <keyword>mp</keyword>
+         <keyword>mr</keyword>
+         <keyword>mv</keyword>
+         <keyword>or</keyword>
+         <keyword>pb</keyword>
+         <keyword>pc</keyword>
+         <keyword>pe</keyword>
+         <keyword>pE</keyword>
+         <keyword>pf</keyword>
+         <keyword>pL</keyword>
+         <keyword>pm</keyword>
+         <keyword>pn</keyword>
+         <keyword>pp</keyword>
+         <keyword>pr</keyword>
+         <keyword>pR</keyword>
+         <keyword>ps</keyword>
+         <keyword>pS</keyword>
+         <keyword>pt</keyword>
+         <keyword>pv</keyword>
+         <keyword>px</keyword>
+         <keyword>ra</keyword>
+         <keyword>Rb</keyword>
+         <keyword>Re</keyword>
+         <keyword>Rf</keyword>
+         <keyword>rg</keyword>
+         <keyword>Rh</keyword>
+         <keyword>Rm</keyword>
+         <keyword>Rn</keyword>
+         <keyword>rp</keyword>
+         <keyword>Rp</keyword>
+         <keyword>rr</keyword>
+         <keyword>Rr</keyword>
+         <keyword>Rs</keyword>
+         <keyword>s</keyword>
+         <keyword>Sr</keyword>
+         <keyword>St</keyword>
+         <keyword>Sx</keyword>
+         <keyword>t</keyword>
+         <keyword>ta</keyword>
+         <keyword>tb</keyword>
+         <keyword>Tc</keyword>
+         <keyword>tf</keyword>
+         <keyword>Tf</keyword>
+         <keyword>Ti</keyword>
+         <keyword>Tl</keyword>
+         <keyword>tm</keyword>
+         <keyword>Tn</keyword>
+         <keyword>tp</keyword>
+         <keyword>Tp</keyword>
+         <keyword>tr</keyword>
+         <keyword>ts</keyword>
+         <keyword>tt</keyword>
+         <keyword>tx</keyword>
+         <keyword>ty</keyword>
+         <keyword>tz</keyword>
+         <keyword>wd</keyword>
+         <keyword>we</keyword>
+         <keyword>wi</keyword>
+         <keyword>xf</keyword>
+       </context>
+
+      </include>
+    </context>
+  </definitions>
+</language>
